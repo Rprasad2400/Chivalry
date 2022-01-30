@@ -31,8 +31,9 @@ var fileInput = document.getElementById("file");
 function Transcribe(){
     let status = "";
     let soundData = {
-        "audio_url": document.getElementById("urlInput").value,
+        "audio_url": document.getElementById("audiolink").value,
     }
+    console.log(soundData["audio_url"])
     console.log(soundData["audio_url"])
     fetch("https://api.assemblyai.com/v2/transcript", {
         method: "POST",
@@ -60,12 +61,12 @@ function AwaitStatus(id){
     })
     .then(res=>res.json())
     .then(data=>{
-        document.getElementById("textInput").value = data.text;
+        document.getElementById("transcript").value = data.text;
     })
 }
 
 function AnalyzeSentiment(){
-    let txt = document.getElementById("textInput").value;
+    let txt = document.getElementById("transcript").value;
     data = {
         "document":{
             "type": 1,
@@ -82,8 +83,19 @@ function AnalyzeSentiment(){
     })
         .then(res=>res.json())
         .then(data=>{
+            let analysis = "";
             for(let i = 0; i < data.sentences.length; i++){
-                console.log(data.sentences[i].text.content + data.sentences[i].sentiment.score)
+                analysis += data.sentences[i].text.content + "\nSentiment: " + data.sentences[i].sentiment.score + "\n"
             }
+            document.getElementById("AudioAnalysis").innerHTML = analysis
+            let positivityScore = parseInt(data.documentSentiment.score * data.documentSentiment.magnitude * 100 | 0);
+            document.getElementById("main-sentiment-output").innerHTML = "Chivalry Score: " + positivityScore;
+            if(positivityScore >= 0){
+                document.getElementById("chivalryMessage").innerHTML = "How chivalrous of you!"
+            }else {
+                document.getElementById("chivalryMessage").innerHTML = "An honorable knight should not behave in such a way!"
+            }
+
+            
         })
 }

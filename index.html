@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chivalry Voice Analysis</title>
   <link rel="stylesheet" href="styles.css">
-  <script defer src="index.js"></script>
+  <script defer src="src/index.js"></script>
 </head>
     <body>
       <div class="head-div">
@@ -18,7 +18,7 @@
       <br/>
 <div class = "main-sentiment-div">
             <div class = "left-div"><div class ="box"><label for="audiolink">URL for Audio</label><textarea placeholder="Audio Url Link..." name="audiolink" id="audiolink" cols="30" rows="1"></textarea></div></div>
-            <div class = "right-div"><button class= "audioButton" type="submit" onclick="ProcessAudio()">SUBMIT</button></div>
+            <div class = "right-div"><button class= "audioButton" type="submit" onclick="Transcribe()">SUBMIT</button></div>
           </div>
 
            <!--Where the total sentiment and transcript is-->
@@ -28,26 +28,18 @@
            <div class= "main-sentiment-div">
 
                
-               <textarea name="transcript" readonly id="transcript" class="transcript" cols="75" rows="25">Blah Blah</textarea>
+               <textarea name="transcript" id="transcript" class="transcript" cols="75" rows="25"></textarea>
            </div>
                <!--Where the sentiment for sentences are-->
            
                <div class='sentence-sentiment-div'>
 
-
+               <div class="center-div"><button class= "sentimentButton" type="submit" onclick="AnalyzeSentiment()">ANALYZE TEXT</button></div>
                <br>
-
-               <div class="center-div"><button class= "sentimentButton" type="submit" onclick="AnalyzeSentiment()">ANALYZE    AUDIO</button></div>
+               <p id="main-sentiment-output">Chivalry Score: 0</p>
+               <p id="chivalryMessage"></p>
                <br>
-               <p class="main-sentiment-output">85%</p>
-               <h2 class = "second-header">Audio Analysis</h2>
-               <div class = "left-div">
-                   <textarea  readonly name="sentence" id="" cols="30" rows="10">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</textarea>
-           
-               </div>
-               <div class ="right-div">
-                   <p class="sentiment-percentage">20%</p>
-           
+              <textarea  readonly name="sentence" id="AudioAnalysis" cols="30" rows="10">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</textarea>
                </div>
 
     </body>
