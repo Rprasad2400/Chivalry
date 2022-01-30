@@ -1,0 +1,110 @@
+
+div.head-div{
+    padding-bottom: 5%;
+    background-color: rgb(139, 0, 104);
+    overflow: visible;
+    box-shadow: 0 5px  5px 0 rgba(0,0,0,0.5);
+}
+h1.title {
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: oblique;
+    color: rgb(255, 255, 255);
+
+   
+}
+div.center-div{
+    padding : 1%;
+    text-align: center;
+
+    
+    
+}
+
+p.main-sentiment-output{
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    padding: 1%;
+}
+button.audioButton{
+
+    color: white;
+    background-color: green;
+    text-align: center;
+    border: none;
+    padding: 30%;
+    display: inline-block;
+    font-size: 16px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    box-shadow: 0 5px  5px 0 rgba(0,0,0,0.5);
+}
+img.armor-knight-left{
+    width: 200px;
+    border-radius:100px;
+   padding-top: 5%;
+    
+
+}
+img.armor-knight-right{
+    width: 200px;
+    transform: scaleX(-1);
+    border-radius:100px;
+    padding-top: 5%;
+}
+textarea{
+    outline: none;
+    resize: none;
+    padding: 1%;
+    border-radius: 10px;
+    font-size: x-large;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+label{
+    text-align: right;
+    color: white;
+}
+div.box{
+    padding: 5%;
+    background-color: purple;
+}
+button.sentimentButton{
+    color: white;
+    background-color: green;
+    text-align: center;
+    border: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 2%;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    box-shadow: 0 5px  5px 0 rgba(0,0,0,0.5);
+}
+audio.div{
+    padding-top: 10%;
+}
+h2{
+    text-align: center;
+    padding: 5%;
+}
+
+textarea.transcript{
+    padding: 1%;
+    font-size: x-large;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+div.main-sentiment-div{
+text-align: center;
+
+padding: 10%;
+}
+div.left-div{
+    float: left;
+    padding-left: 10%;
+    
+}
+div.right-div{
+    
+    float: right;
+    padding-right: 10%;
+
+}

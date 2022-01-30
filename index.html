@@ -8,6 +8,47 @@
   <script defer src="index.js"></script>
 </head>
     <body>
-        
+      <div class="head-div">
+        <div class="left-div"><img src="img/knight-armor.jpg" alt="knight in armor" class="armor-knight-left"></div>
+        <div class = right-div><img src="img/knight-armor.jpg" alt="knight in armor" class="armor-knight-right"></div>
+        <div class = "center-div"><h1 class= "title">TEST OF CHIVALRY</h1></div>
+        </div>
+      <br/>
+            
+      <br/>
+<div class = "main-sentiment-div">
+            <div class = "left-div"><div class ="box"><label for="audiolink">URL for Audio</label><textarea placeholder="Audio Url Link..." name="audiolink" id="audiolink" cols="30" rows="1"></textarea></div></div>
+            <div class = "right-div"><button class= "audioButton" type="submit" onclick="ProcessAudio()">SUBMIT</button></div>
+          </div>
+
+           <!--Where the total sentiment and transcript is-->
+           <br/>
+            
+           <br/>
+           <div class= "main-sentiment-div">
+
+               
+               <textarea name="transcript" readonly id="transcript" class="transcript" cols="75" rows="25">Blah Blah</textarea>
+           </div>
+               <!--Where the sentiment for sentences are-->
+           
+               <div class='sentence-sentiment-div'>
+
+
+               <br>
+
+               <div class="center-div"><button class= "sentimentButton" type="submit" onclick="AnalyzeSentiment()">ANALYZE    AUDIO</button></div>
+               <br>
+               <p class="main-sentiment-output">85%</p>
+               <h2 class = "second-header">Audio Analysis</h2>
+               <div class = "left-div">
+                   <textarea  readonly name="sentence" id="" cols="30" rows="10">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</textarea>
+           
+               </div>
+               <div class ="right-div">
+                   <p class="sentiment-percentage">20%</p>
+           
+               </div>
+
     </body>
 </html>
