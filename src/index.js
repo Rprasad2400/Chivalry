@@ -1,7 +1,9 @@
 const API_KEY_NLP = "AIzaSyBMX_ZaUPUUE5wqUDZ-UId0PSsnw94aoHU"
 const API_KEY_ASSEMBLYAI = "2a91e62981a84432be2b19486ee4bdf9"
 const POST_REQUEST_URL = "https://language.googleapis.com/v1beta2/documents:analyzeEntitySentiment";
-var fileInput = document.getElementById("file");
+continueAPICall = true;
+// var fileInput = document.getElementById("file");
+
 
 // function fileValidation() {
 //     var reader = new FileReader();
@@ -21,20 +23,24 @@ var fileInput = document.getElementById("file");
 //         })
 //             .then(res=>res.json())
 //             .then(data=>Transcribe(data.upload_url))
-
 //     };
-
 //     reader.readAsArrayBuffer(fileInput.files[0]);
-
 // }
+
+// Takes link from url input field and uses AssemblyAI API to process
 
 function Transcribe(){
     let status = "";
     let soundData = {
         "audio_url": document.getElementById("audiolink").value,
     }
-    console.log(soundData["audio_url"])
-    console.log(soundData["audio_url"])
+
+    // Check syntax of entry valid, API handles invalid entries that start with http
+    if(soundData["audio_url"].substring(0,4) != "http"){
+        document.getElementById("transcript").value = "Invalid Entry. Input must be a link.";
+        return;
+    }
+
     fetch("https://api.assemblyai.com/v2/transcript", {
         method: "POST",
         headers: {
@@ -45,11 +51,21 @@ function Transcribe(){
     })
     .then(res=>res.json())
     .then(data=>{
+
+        continueAPICall = true;
         status = data.status;
-        console.log(data.id);
-        setTimeout(function() { AwaitStatus(data.id) }, 10000)
+
+        // Interval continuously calls GET on API until it returns either "completed" or "error"
+        const interval = setInterval(function() {
+            if(continueAPICall)
+                AwaitStatus(data.id);
+            else
+                clearInterval(interval);
+        }, 2000);
     })    
 }
+
+// GET call to AssemblyAI API to check on status of transcript generation
 
 function AwaitStatus(id){
     fetch(`https://api.assemblyai.com/v2/transcript/${id}`, {
@@ -61,17 +77,23 @@ function AwaitStatus(id){
     })
     .then(res=>res.json())
     .then(data=>{
-        document.getElementById("transcript").value = data.text;
+        console.log(data.status);
+        if(data.status == "completed" || data.status == "error"){
+            document.getElementById("transcript").value = data.text;
+            continueAPICall = false;
+        }
     })
 }
 
+// Call to Google Cloud Natural Language Processing API. Uses text from the input field with id transcript
+
 function AnalyzeSentiment(){
-    let txt = document.getElementById("transcript").value;
+    let textToProcess = document.getElementById("transcript").value;
     data = {
         "document":{
             "type": 1,
             "language": "en",
-            "content": txt
+            "content": textToProcess
         },
         "encodingType": 1
     }
@@ -83,19 +105,23 @@ function AnalyzeSentiment(){
     })
         .then(res=>res.json())
         .then(data=>{
+            let MessageOutput = document.getElementById("ChivalryMessage");
             let analysis = "";
             for(let i = 0; i < data.sentences.length; i++){
-                analysis += data.sentences[i].text.content + "\nSentiment: " + data.sentences[i].sentiment.score + "\n"
-            }
-            document.getElementById("AudioAnalysis").innerHTML = analysis
-            let positivityScore = parseInt(data.documentSentiment.score * data.documentSentiment.magnitude * 100 | 0);
-            document.getElementById("main-sentiment-output").innerHTML = "Chivalry Score: " + positivityScore;
-            if(positivityScore >= 0){
-                document.getElementById("chivalryMessage").innerHTML = "How chivalrous of you!"
-            }else {
-                document.getElementById("chivalryMessage").innerHTML = "An honorable knight should not behave in such a way!"
+                analysis += data.sentences[i].text.content + "\n\tSentiment: " + data.sentences[i].sentiment.score + "\n"
             }
 
-            
+            document.getElementById("AudioAnalysis").innerHTML = analysis
+            let chivalryScore = parseInt(data.documentSentiment.score * data.documentSentiment.magnitude * 100 | 0);
+            document.getElementById("main-sentiment-output").innerHTML = "Chivalry Score: " + chivalryScore;
+
+            if(chivalryScore >= 0){
+                MessageOutput.innerHTML = "How chivalrous of you!";
+                MessageOutput.style.color = "rgb(152, 255, 152)";
+            }else {
+                MessageOutput.innerHTML = "An honorable knight should not behave in such a way!";
+                MessageOutput.style.color = "rgb(255, 56, 0)";
+            }
+
         })
 }
