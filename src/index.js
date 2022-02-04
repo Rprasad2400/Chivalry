@@ -30,6 +30,7 @@ continueAPICall = true;
 // Takes link from url input field and uses AssemblyAI API to process
 
 function Transcribe(){
+    document.getElementById("TranscriptLoading").style.display = "block";
     let status = "";
     let soundData = {
         "audio_url": document.getElementById("audiolink").value,
@@ -38,6 +39,7 @@ function Transcribe(){
     // Check syntax of entry valid, API handles invalid entries that start with http
     if(soundData["audio_url"].substring(0,4) != "http"){
         document.getElementById("transcript").value = "Invalid Entry. Input must be a link.";
+        document.getElementById("TranscriptLoading").style.display = "none";
         return;
     }
 
@@ -79,8 +81,13 @@ function AwaitStatus(id){
     .then(data=>{
         console.log(data.status);
         if(data.status == "completed" || data.status == "error"){
-            document.getElementById("transcript").value = data.text;
+            if(data.status == "error"){
+                document.getElementById("transcript").value = "Error Generating Transcript. Ensure link is valid";
+            }else{
+                document.getElementById("transcript").value = data.text;
+            }
             continueAPICall = false;
+            document.getElementById("TranscriptLoading").style.display = "none";
         }
     })
 }

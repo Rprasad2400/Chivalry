@@ -14,17 +14,19 @@
         <div class = "center-div"><h1 class= "title">TEST OF CHIVALRY</h1></div>
         </div>
       <br/>
-            
       <br/>
-<div class = "main-sentiment-div">
+      <div class = "main-sentiment-div">
             <div class = "left-div"><div class ="box"><label for="audiolink">URL for Audio</label><textarea placeholder="Audio Url Link..." name="audiolink" id="audiolink" cols="30" rows="1"></textarea></div></div>
             <div class = "right-div"><button class= "audioButton" type="submit" onclick="Transcribe()">SUBMIT</button></div>
           </div>
+          <br/>
+          <div id="TranscriptLoading">
+            <img id="Spinner" src="img/spinner.gif"/>
+            <div>Transcript Loading...</div>
+          </div>
 
            <!--Where the total sentiment and transcript is-->
-           <br/>
             
-           <br/>
            <div class= "main-sentiment-div">
 
                
@@ -39,7 +41,7 @@
                <p id="main-sentiment-output">Chivalry Score: 0</p>
                <p id="ChivalryMessage"></p>
                <br>
-              <textarea  readonly name="sentence" id="AudioAnalysis" cols="30" rows="10">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</textarea>
+              <textarea  readonly name="sentence" id="AudioAnalysis" cols="30" rows="10"></textarea>
                </div>
 
     </body>
