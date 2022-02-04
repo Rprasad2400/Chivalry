@@ -9,15 +9,15 @@ div.head-div{
 }
 h1.title {
     font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-size:50px;
     font-style: oblique;
     color: rgb(255, 255, 255);
-
-   
 }
 div.center-div{
     padding : 1%;
     text-align: center;
+    align-items:center;
 }
 
 p#main-sentiment-output{
@@ -111,6 +111,16 @@ div.right-div{
     
     float: right;
     padding-right: 10%;
+
+}
+div.left-div-url{
+    float: left;
+    padding-left: 20%;
+    font-size: 30px;
+}
+div.right-div-url{
+    
+    float: left;
 
 }
 #AudioAnalysis {
