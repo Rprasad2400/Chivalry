@@ -184,7 +184,8 @@ div.right-div-url{
     border-radius: 10px;
     margin-top: 10px;
     display: none;
-    padding-top: 10px;
+    padding: 10px;
+    padding-bottom: 20px;
 }
 
 .noselect {
