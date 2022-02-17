@@ -2,34 +2,40 @@ const API_KEY_NLP = "AIzaSyBMX_ZaUPUUE5wqUDZ-UId0PSsnw94aoHU"
 const API_KEY_ASSEMBLYAI = "2a91e62981a84432be2b19486ee4bdf9"
 const POST_REQUEST_URL = "https://language.googleapis.com/v1beta2/documents:analyzeEntitySentiment";
 continueAPICall = true;
-// var fileInput = document.getElementById("file");
+var fileInput = document.getElementById("file");
 
 
-// function fileValidation() {
-//     var reader = new FileReader();
-
-//     reader.onload = function(){
-//         var text = reader.result;
-//         // var node = document.getElementById('output');
-//         // node.innerText = text;
-//         fetch('https://api.assemblyai.com/v2/upload', {
-//             method: "POST",
-//             headers: {
-//                 'authorization': API_KEY_ASSEMBLYAI,
-//                 'content-type': 'application/json',
-//                 "transfer-encoding": "chunked",
-//         },
-//             body: text
-//         })
-//             .then(res=>res.json())
-//             .then(data=>Transcribe(data.upload_url))
-//     };
-//     reader.readAsArrayBuffer(fileInput.files[0]);
-// }
+function fileValidation() {
+    const { name: fileName, size } = fileInput.files[0];
+    const fileSize = (size / 1000).toFixed(2);
+    const fileNameAndSize = `${fileName} - ${fileSize}KB`;
+    document.querySelector('.file-name').textContent = fileNameAndSize;
+    document.querySelector('.file-name').style.display = "block";
+    var reader = new FileReader();
+    reader.onload = function(){
+        var text = reader.result;
+        fetch('https://api.assemblyai.com/v2/upload', {
+            method: "POST",
+            headers: {
+                'authorization': API_KEY_ASSEMBLYAI,
+                'content-type': 'application/json',
+                "transfer-encoding": "chunked",
+        },
+            body: text
+        })
+            .then(res=>res.json())
+            .then(data=>{
+                Transcribe(data.upload_url)
+            })
+    };
+    reader.readAsArrayBuffer(fileInput.files[0]);
+}
 
 // Takes link from url input field and uses AssemblyAI API to process
 
-function Transcribe(){
+function Transcribe(audioURL){
+    /*
+    // URL input processor
     document.getElementById("TranscriptLoading").style.display = "block";
     let status = "";
     let soundData = {
@@ -41,7 +47,13 @@ function Transcribe(){
         document.getElementById("transcript").value = "Invalid Entry. Input must be a link.";
         document.getElementById("TranscriptLoading").style.display = "none";
         return;
+    }*/
+    // File Input Processor
+    console.log(audioURL);
+    let soundData = {
+        "audio_url": audioURL,
     }
+    document.getElementById("TranscriptLoading").style.display = "block";
 
     fetch("https://api.assemblyai.com/v2/transcript", {
         method: "POST",
@@ -55,11 +67,10 @@ function Transcribe(){
     .then(data=>{
 
         continueAPICall = true;
-        status = data.status;
 
         // Interval continuously calls GET on API until it returns either "completed" or "error"
         const interval = setInterval(function() {
-            if(continueAPICall)
+            if(continueAPICall && typeof data.id !== 'undefined')
                 AwaitStatus(data.id);
             else
                 clearInterval(interval);
@@ -80,8 +91,8 @@ function AwaitStatus(id){
     .then(res=>res.json())
     .then(data=>{
         console.log(data.status);
-        if(data.status == "completed" || data.status == "error"){
-            if(data.status == "error"){
+        if(data.status === "completed" || data.status === "error"){
+            if(data.status === "error"){
                 document.getElementById("transcript").value = "Error Generating Transcript. Ensure link is valid";
             }else{
                 document.getElementById("transcript").value = data.text;

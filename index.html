@@ -17,8 +17,17 @@
       <br/>
       <br/>
       <div class = "main-sentiment-div">
+            <!-- URL Input Form
             <div class = "left-div-url"><div class ="box"><label for="audiolink">URL for Audio</label><textarea placeholder="Audio Url Link..." name="audiolink" id="audiolink" cols="30" rows="1"></textarea></div></div>
-            <div class = "right-div-url"><button class="audioButton" type="submit" onclick="Transcribe()">SUBMIT</button></div>
+            <div class = "right-div-url"><button class="audioButton" type="submit" onclick="Transcribe()">SUBMIT</button></div> -->
+          <div class="file-input">
+              <input type="file" 
+              accept=".3ga,.aac,.ac3,.aif,.aiff,.alac,.amr,.ape,.au,.dss,.flac,.flv,.m4a,.m4b,.m4p,.mp3,.mpga,.ogg, .oga, .mogg,.opus,.qcp,.tta,.voc,.wav,.wv" 
+              id="file" class="file" onchange="fileValidation()">
+              <label for="file" class="noselect">Select file</label>
+              <p class="file-name"></p>
+              <!-- <div id="fileSubmit" class="center-div"><button  class="audioButton" type="submit" onclick="fileValidation()">SUBMIT</button></div> -->
+            </div>
           </div>
           <br/>
           <div id="TranscriptLoading">

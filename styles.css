@@ -151,3 +151,49 @@ div.right-div-url{
     height: 100px;
     width: 100px;
 }
+.file {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+  }
+.file-input label {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: block;
+    position: relative;
+    width: 400px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    border-radius: 30px;
+    background-color:rgb(139, 0, 104)
+}  
+
+.file-name {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #fff;
+    background-color:rgb(139, 0, 104);
+    width: 200px;
+    height: 30px;
+    margin: 0 auto;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: none;
+    padding-top: 10px;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }  
+
