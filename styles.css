@@ -178,14 +178,12 @@ div.right-div-url{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: #fff;
     background-color:rgb(139, 0, 104);
-    width: 200px;
-    height: 30px;
+    width: 300px;
     margin: 0 auto;
-    border-radius: 10px;
+    border-radius: 15px;
     margin-top: 10px;
     display: none;
     padding: 10px;
-    padding-bottom: 20px;
 }
 
 .noselect {
