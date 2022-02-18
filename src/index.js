@@ -37,17 +37,16 @@ function Transcribe(audioURL){
     /*
     // URL input processor
     document.getElementById("TranscriptLoading").style.display = "block";
-    let status = "";
     let soundData = {
         "audio_url": document.getElementById("audiolink").value,
     }
-
     // Check syntax of entry valid, API handles invalid entries that start with http
     if(soundData["audio_url"].substring(0,4) != "http"){
         document.getElementById("transcript").value = "Invalid Entry. Input must be a link.";
         document.getElementById("TranscriptLoading").style.display = "none";
         return;
     }*/
+
     // File Input Processor
     console.log(audioURL);
     let soundData = {
@@ -69,6 +68,7 @@ function Transcribe(audioURL){
         continueAPICall = true;
 
         // Interval continuously calls GET on API until it returns either "completed" or "error"
+        // Stops checking once AssemblyAI has finished processing the audio
         const interval = setInterval(function() {
             if(continueAPICall && typeof data.id !== 'undefined')
                 AwaitStatus(data.id);
@@ -79,7 +79,6 @@ function Transcribe(audioURL){
 }
 
 // GET call to AssemblyAI API to check on status of transcript generation
-
 function AwaitStatus(id){
     fetch(`https://api.assemblyai.com/v2/transcript/${id}`, {
         method: "GET",
@@ -104,7 +103,6 @@ function AwaitStatus(id){
 }
 
 // Call to Google Cloud Natural Language Processing API. Uses text from the input field with id transcript
-
 function AnalyzeSentiment(){
     let textToProcess = document.getElementById("transcript").value;
     data = {
