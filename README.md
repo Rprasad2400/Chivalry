@@ -10,5 +10,5 @@ Alex Rowe (github.com/andes0113)
 - API Calls, Backend, Frontend
 
 
-Rohan Prasad(github.com/Rprasad2400)
+Rohan Prasad (github.com/Rprasad2400)
 - Website Design, Frontend
