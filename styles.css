@@ -105,6 +105,7 @@ h2{
 }
 
 textarea.transcript{
+    width: 90%;
     padding: 1%;
     font-size: x-large;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
