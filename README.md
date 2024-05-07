@@ -6,6 +6,7 @@ We used Javascript, HTML, and CSS to call a series of APIs (AssemblyAI and then 
 
 Can be deployed at:
 http://andes0113.github.io/Chivalry
+
 Contributors:
 
 Alex Rowe (github.com/andes0113)
